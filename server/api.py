@@ -19,5 +19,7 @@ def get_data(ticker):
 	#     },
 	#	  ...
 	# }
-	return data
+	two_keys = list(sorted(data.keys()))[:2]
+	short_data = {k:data[k] for k in two_keys}
+	return short_data
 
