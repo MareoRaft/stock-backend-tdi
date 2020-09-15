@@ -1,0 +1,3 @@
+# .env variables can change depending on your computer/environment, and may also contain secrets
+.env
+
