@@ -2,7 +2,12 @@
 import os
 
 # 3rd party imports
-from flask import Flask, request, redirect
+from flask import Flask, render_template, request, redirect
+import flask
+print(flask.__version__) # version 1.1.2
+
+# local imports
+from . import api
 
 
 
@@ -14,7 +19,9 @@ app = Flask(__name__)
 # Define the routes
 @app.route('/')
 def index():
-	return render_template('index.html')
+	data = api.get_data('GOOGL')
+	print('got data')
+	return data
 
 @app.route('/about')
 def about():
