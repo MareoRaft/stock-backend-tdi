@@ -5,7 +5,7 @@ Functions to retrieve desired data from the API.
 # 3rd-party
 from alpha_vantage.timeseries import TimeSeries
 
-def get_data(ticker):
+def get_data(ticker, truncate_data=False):
 	ts = TimeSeries()
 	data, metadata = ts.get_intraday(ticker)
 	# The data has the following structure (shown by example):
@@ -19,7 +19,8 @@ def get_data(ticker):
 	#     },
 	#	  ...
 	# }
-	two_keys = list(sorted(data.keys()))[:2]
-	short_data = {k:data[k] for k in two_keys}
-	return short_data
+	if truncate_data:
+		two_keys = list(sorted(data.keys()))[:2]
+		data = {k:data[k] for k in two_keys}
+	return data
 

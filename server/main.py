@@ -9,6 +9,7 @@ print(flask.__version__) # version 1.1.2
 # local imports
 from . import api
 from . import analyze
+from . import graph
 
 
 
@@ -23,7 +24,11 @@ def index():
 	api_data = api.get_data('GOOGL')
 	df = analyze.get_dataframe(api_data)
 	frontend_data = analyze.get_frontend_data(df)
-	return frontend_data
+	desired_data = frontend_data['1. open']
+	plot = graph.graph_data(desired_data, app)
+	graph_html = graph.get_html_file(plot)
+	return graph_html
+
 
 @app.route('/about')
 def about():
