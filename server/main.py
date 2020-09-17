@@ -21,7 +21,10 @@ app = Flask(__name__)
 # Define the routes
 @app.route('/')
 def index():
-	api_data = api.get_data('GOOGL')
+	# get url params
+	ticker = flask.request.args.get('ticker')
+	# computer everything
+	api_data = api.get_data(ticker)
 	df = analyze.get_dataframe(api_data)
 	frontend_data = analyze.get_frontend_data(df)
 	desired_data = frontend_data['1. open']
