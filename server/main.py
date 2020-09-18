@@ -21,18 +21,11 @@ app = Flask(__name__, static_folder=STATIC_PATH)
 
 
 # Define the routes
-# @app.route('/', defaults={'path': ''})
-# @app.route('/<path:path>')
-# def serve(path):
-# 	if path != '' and os.path.exists(f'{app.static_folder}/{path}'):
-# 		return send_from_directory(app.static_folder, path)
-# 	else:
-# 		return send_from_directory(app.static_folder, 'index.html')
-@app.route('/')
-def serve():
-	app.logger.info('main')
-	return send_from_directory(app.static_folder, 'index.html')
-
+@app.route('/static', defaults={'path': 'index.html'})
+@app.route('/static/<path:path>')
+def serve_static_file(path):
+	app.logger.info('serve static file')
+	return send_from_directory(app.static_folder, path)
 
 
 @app.route('/stock-graph')
@@ -47,11 +40,6 @@ def index():
 	plot = graph.graph_data(desired_data, app)
 	graph_html = graph.get_html_file(plot)
 	return graph_html
-
-
-@app.route('/about')
-def about():
-  return render_template('about.html')
 
 
 
