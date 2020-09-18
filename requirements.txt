@@ -3,3 +3,5 @@ Flask==1.1.2
 alpha_vantage==2.2.0
 pandas==1.1.2
 numpy==1.19.2
+gunicorn==20.0.4
+
