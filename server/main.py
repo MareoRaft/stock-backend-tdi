@@ -4,7 +4,6 @@ import os
 # 3rd party imports
 from flask import Flask, render_template, request, redirect, send_from_directory
 import flask
-# print(flask.__version__) # version 1.1.2
 
 # local imports
 from . import api
@@ -14,22 +13,12 @@ from . import graph
 
 
 # Create the app
-REPO_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-STATIC_PATH = os.path.join(REPO_PATH, 'client', 'build')
-app = Flask(__name__, static_folder=STATIC_PATH)
+app = Flask(__name__)
 
 
 
-# TODO: change base url for react url paths
 # Define the routes
-@app.route('/', defaults={'path': 'index.html'})
-@app.route('/<path:path>')
-def serve_static_file(path):
-	app.logger.info('serve static file')
-	return send_from_directory(app.static_folder, path)
-
-
-@app.route('/stock-graph')
+@app.route('/')
 def index():
 	# get url params
 	ticker = flask.request.args.get('ticker')
