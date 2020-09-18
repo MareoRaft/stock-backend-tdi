@@ -1,6 +1,15 @@
 Run
 --------------------
-To run the server, do
+To run, do
+
+    heroku local
+
+To run the server with gunicorn manually, do
+
+    export all .env vars
+    gunicorn server.main:app
+
+To run with flask manually, do
 
 	# Python module and var for the flask `app` var
 	export FLASK_APP=server.main:app
