@@ -4,7 +4,7 @@ import os
 # 3rd party imports
 from flask import Flask, render_template, request, redirect, send_from_directory
 import flask
-print(flask.__version__) # version 1.1.2
+# print(flask.__version__) # version 1.1.2
 
 # local imports
 from . import api
@@ -14,18 +14,24 @@ from . import graph
 
 
 # Create the app
-app = Flask(__name__, static_folder='client/build')
+REPO_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+STATIC_PATH = os.path.join(REPO_PATH, 'templates')
+app = Flask(__name__, static_folder=STATIC_PATH)
 
 
 
 # Define the routes
-@app.route('/', defaults={'path': ''})
-@app.route('/<path:path>')
-def serve(path):
-	if path != '' and os.path.exists(f'{app.static_folder}/{path}'):
-		return send_from_directory(app.static_folder, path)
-	else:
-		return send_from_directory(app.static_folder, 'index.html')
+# @app.route('/', defaults={'path': ''})
+# @app.route('/<path:path>')
+# def serve(path):
+# 	if path != '' and os.path.exists(f'{app.static_folder}/{path}'):
+# 		return send_from_directory(app.static_folder, path)
+# 	else:
+# 		return send_from_directory(app.static_folder, 'index.html')
+@app.route('/')
+def serve():
+	app.logger.info('main')
+	return send_from_directory(app.static_folder, 'index.html')
 
 
 
