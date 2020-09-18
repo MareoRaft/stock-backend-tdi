@@ -7,28 +7,47 @@ from bokeh.resources import CDN
 from bokeh.embed import file_html
 import numpy as np
 
+# local
+from . import global_constants as GC
+
+
+
+STAT_TYPE_TO_COLOR = {
+	'open': 'blue',
+	'high': 'green',
+	'low': 'red',
+	'close': 'orange',
+}
+
 
 def get_x_and_y_values(data, app):
-	sorted_dates = list(sorted(data['4. close'].keys()))
+	sorted_dates = list(sorted(data['open'].keys()))
 	x = list(range(len(sorted_dates)))
-	y = [data['1. open'][d] for d in sorted_dates]
-	y_close = [data['4. close'][d] for d in sorted_dates]
+	y = {
+		stat_type: [data[stat_type][d] for d in sorted_dates]
+		for stat_type in GC.STAT_TYPES
+	}
 	# app.logger.info(f'\nx values: {x}\ny values: {y}\n\n')
-	app.logger.info(f'rstu')
-	return x, y, y_close
+	return x, y
 
 
-def graph_data(data, is_close_displayed, app):
+def graph_data(data, is_stat_type_displayed, app):
 	# x-axis is date, y-axis is stock-price
-	x, y, y_close = get_x_and_y_values(data, app)
+	x, y = get_x_and_y_values(data, app)
 	# create the plot
 	plot = bp.figure(
 		title='Daily stock price',
 	)
 	# add line to the plot
-	plot.line(x, y, legend_label='avg price', line_width=3, color='green')
-	if is_close_displayed:
-		plot.line(x, y_close, legend_label='close price', line_width=3, color='yellow')
+	for stat_type in GC.STAT_TYPES:
+		if is_stat_type_displayed[stat_type]:
+			plot.line(
+				x,
+				y[stat_type],
+				legend_label=f'{stat_type} price',
+				line_width=3,
+				color=STAT_TYPE_TO_COLOR[stat_type],
+			)
 	# return the plot
 	return plot
 

@@ -7,8 +7,10 @@ import flask
 
 # local imports
 from . import api
+from . import normalize
 from . import analyze
 from . import graph
+from . import global_constants as GC
 
 
 
@@ -22,12 +24,17 @@ app = Flask(__name__)
 def index():
 	# get url params
 	ticker = flask.request.args.get('ticker', default='VZ')
-	is_close_displayed = flask.request.args.get('close', default='false') == 'true'
+	is_stat_type_displayed = {
+		stat_type: flask.request.args.get(stat_type, default='false') == 'true'
+		for stat_type in GC.STAT_TYPES
+	}
 	# computer everything
 	api_data = api.get_data(ticker)
-	df = analyze.get_dataframe(api_data)
+	clean_data = normalize.fix_stat_types_in_data(api_data)
+	app.logger.info(clean_data)
+	df = analyze.get_dataframe(clean_data)
 	frontend_data = analyze.get_frontend_data(df)
-	plot = graph.graph_data(frontend_data, is_close_displayed, app)
+	plot = graph.graph_data(frontend_data, is_stat_type_displayed, app)
 	graph_html = graph.get_html_file(plot)
 	return graph_html
 
