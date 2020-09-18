@@ -1,3 +1,9 @@
+# About
+This is the repo for the **backend** of the Stock Ticker App Milestone Project for TDI (The Data Incubator).  The repo for the **frontend** is [here](https://github.com/MareoRaft/stock-frontend-tdi).
+
+
+
+
 Run
 --------------------
 To run, do
@@ -6,7 +12,7 @@ To run, do
 
 To run the server with gunicorn manually, do
 
-    export all .env vars
+    # export all .env vars
     gunicorn server.main:app
 
 To run with flask manually, do
@@ -30,20 +36,14 @@ To run tests
 
 
 
-
-
-
 Build & Deploy
 --------------------
 To build & deploy
 
-	cd client
-	npm run build
 	# update requirements.txt if you haven't done so already
 	pipreqs --force
-	# check changes into git
 	git diff
-	(git commit, etc)
+	# check changes into git if there are any
     git push heroku master
 
 
