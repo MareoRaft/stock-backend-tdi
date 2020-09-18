@@ -1,5 +1,5 @@
 # About
-This is the repo for the **backend** of the Stock Ticker App Milestone Project for TDI (The Data Incubator).  The repo for the **frontend** is [here](https://github.com/MareoRaft/stock-frontend-tdi).
+This is the repo for the **backend** of the Stock Ticker App Milestone Project for TDI (The Data Incubator).  The repo for the [**frontend** is here](https://github.com/MareoRaft/stock-frontend-tdi).  The actual [deployed app is here](https://stock-frontend-tdi.herokuapp.com).
 
 
 
