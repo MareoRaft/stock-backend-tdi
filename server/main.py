@@ -15,14 +15,15 @@ from . import graph
 
 # Create the app
 REPO_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-STATIC_PATH = os.path.join(REPO_PATH, 'templates')
+STATIC_PATH = os.path.join(REPO_PATH, 'client', 'build')
 app = Flask(__name__, static_folder=STATIC_PATH)
 
 
 
+# TODO: change base url for react url paths
 # Define the routes
-@app.route('/static', defaults={'path': 'index.html'})
-@app.route('/static/<path:path>')
+@app.route('/', defaults={'path': 'index.html'})
+@app.route('/<path:path>')
 def serve_static_file(path):
 	app.logger.info('serve static file')
 	return send_from_directory(app.static_folder, path)

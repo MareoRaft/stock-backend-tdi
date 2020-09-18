@@ -11,7 +11,7 @@ To run the server, do
 
 
 
-Testing
+Test
 --------------------
 To run tests, do
 
@@ -21,12 +21,20 @@ To run tests, do
 
 
 
-Deploying
-------------------
-To deploy
 
-	# update requirements.txt if you haven't done so already, and check changes into git
+
+
+Build & Deploy
+--------------------
+To build & deploy
+
+	cd client
+	npm run build
+	# update requirements.txt if you haven't done so already
 	pipreqs --force
+	# check changes into git
 	git diff
 	(git commit, etc)
     git push heroku master
+
+
