@@ -21,7 +21,7 @@ app = Flask(__name__)
 @app.route('/')
 def index():
 	# get url params
-	ticker = flask.request.args.get('ticker')
+	ticker = flask.request.args.get('ticker', default='VZ')
 	# computer everything
 	api_data = api.get_data(ticker)
 	df = analyze.get_dataframe(api_data)
