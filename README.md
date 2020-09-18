@@ -13,7 +13,7 @@ To run the server, do
 
 Test
 --------------------
-To run tests, do
+To run tests
 
 	pip3 install pytest-dotenv
 	pytest
