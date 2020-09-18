@@ -20,7 +20,7 @@ STAT_TYPE_TO_COLOR = {
 }
 
 
-def get_x_and_y_values(data, app):
+def get_x_and_y_values(data):
 	sorted_dates = list(sorted(data['open'].keys()))
 	x = list(range(len(sorted_dates)))
 	y = {
@@ -31,12 +31,12 @@ def get_x_and_y_values(data, app):
 	return x, y
 
 
-def graph_data(data, is_stat_type_displayed, app):
+def graph_data(data, is_stat_type_displayed, ticker):
 	# x-axis is date, y-axis is stock-price
-	x, y = get_x_and_y_values(data, app)
+	x, y = get_x_and_y_values(data)
 	# create the plot
 	plot = bp.figure(
-		title='Daily stock price',
+		title=f'{ticker} stock price',
 	)
 	# add line to the plot
 	for stat_type in GC.STAT_TYPES:

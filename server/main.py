@@ -34,7 +34,7 @@ def index():
 	app.logger.info(clean_data)
 	df = analyze.get_dataframe(clean_data)
 	frontend_data = analyze.get_frontend_data(df)
-	plot = graph.graph_data(frontend_data, is_stat_type_displayed, app)
+	plot = graph.graph_data(frontend_data, is_stat_type_displayed, ticker)
 	graph_html = graph.get_html_file(plot)
 	return graph_html
 
