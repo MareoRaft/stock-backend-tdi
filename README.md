@@ -17,3 +17,14 @@ To run tests, do
 
 	pip3 install pytest-dotenv
 	pytest
+
+
+
+
+Deploying
+------------------
+To deploy
+
+	# update requirements.txt if you haven't done so already, and check changes into git
+	pipreqs
+    git push heroku master
